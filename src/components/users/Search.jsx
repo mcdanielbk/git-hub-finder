@@ -25,8 +25,16 @@ class Search extends Component {
             value={this.state.text}
             onChange={this.onChange}
           />
-          <input type="submit" value="search" className="btn" />
+          <input type="submit" value="search" className="btn btn-light" />
         </form>
+        {this.props.showClear && (
+          <button
+            className="btn btn-dark btn-block"
+            onClick={this.props.clearUsers}
+          >
+            Clear
+          </button>
+        )}
       </div>
     )
   }
