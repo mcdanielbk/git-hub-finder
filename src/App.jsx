@@ -16,13 +16,18 @@ class App extends Component {
       &client_secrt=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
     this.setState({ users: res.data, loading: false })
   }
+  searchUsers = async (text) => {
+    const res = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}
+      &client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
+    this.setState({ users: res.data.items, loading: false })
+  }
 
   render() {
     return (
       <div>
         <Navbar title="GitHub Hunter" icon="fab fa-github" />
         <div className="container">
-          <Search />
+          <Search searchUsers={this.searchUsers} />
           <Users loading={this.state.loading} users={this.state.users} />
         </div>
       </div>
